@@ -40,8 +40,9 @@ public class MainActivity extends Activity {
             if (resultCode==RESULT_OK){
                 String content = data.getStringExtra(AddNote.CONTENT);
                 String desc = data.getStringExtra(AddNote.DESC);
+                String dataOfNote = data.getStringExtra(AddNote.DATA);
 
-                notes.add(new Notes(content, desc));
+                notes.add(new Notes(content, desc, dataOfNote));
 
                 adapter = new NotesAdapter(this, notes);
 

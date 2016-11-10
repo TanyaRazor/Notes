@@ -6,9 +6,11 @@ package tanya.org.ingvin.notes.app;
 public class Notes{
     String content;
     String desc;
+    String createData;
 
-    Notes(String content, String desc){
+    Notes(String content, String desc, String createData){
         this.content = content;
         this.desc = desc;
+        this.createData = createData;
     }
 }

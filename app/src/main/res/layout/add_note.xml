@@ -17,6 +17,23 @@
             android:id="@+id/descNote" android:layout_gravity="center_horizontal" android:hint="Описание..."
             android:layout_marginLeft="20dp" android:layout_marginTop="10dp" android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="75dp" android:weightSum="1">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/createDataView" android:layout_weight="0.30" android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" android:hint="Дата создания"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выберете дату"
+                android:id="@+id/data_button" android:onClick="dateClickButton"
+                android:layout_marginRight="20dp" android:layout_marginLeft="20dp"/>
+    </LinearLayout>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
