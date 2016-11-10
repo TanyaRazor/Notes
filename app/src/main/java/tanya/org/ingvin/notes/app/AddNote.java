@@ -17,8 +17,6 @@ public class AddNote extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_note);
-
-
     }
 
     public void saveClick(View view) {
