@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
@@ -16,13 +17,29 @@ import java.util.Calendar;
 public class AddNote extends Activity {
     public final static String CONTENT = "CONTENT";
     public static final String DESC = "DESC";
-    Calendar dateOfCreateNote = Calendar.getInstance();
     public final static String DATA = "DATA";
+
+    Calendar dateOfCreateNote = Calendar.getInstance();
+
+    public  int yy;
+    public  int mm;
+    public  int dd;
+
+    //TextView createData = ((TextView) findViewById(R.id.createDataView));
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_note);
+
+        TextView createData = ((TextView) findViewById(R.id.createDataView));
+
+        yy = dateOfCreateNote.get(Calendar.YEAR);
+        mm = dateOfCreateNote.get(Calendar.MONTH)+1;
+        dd = dateOfCreateNote.get(Calendar.DAY_OF_MONTH);
+
+        createData.setText((dd + "." + mm + "." + yy).toString());
     }
 
     public void saveClick(View view) {
@@ -30,27 +47,13 @@ public class AddNote extends Activity {
 
         String content = ((EditText)findViewById(R.id.contentNote)).getText().toString();
         String desc = ((EditText)findViewById(R.id.descNote)).getText().toString();
-        String data = ((EditText) findViewById(R.id.createDataView)).getText().toString();
+        String createDataView = ((TextView)findViewById(R.id.createDataView)).getText().toString();
 
         intent.putExtra(CONTENT,content);
         intent.putExtra(DESC, desc);
-        intent.putExtra(DATA, data);
+        intent.putExtra(DATA, createDataView);
 
         setResult(RESULT_OK, intent);
         finish();
     }
-
-    public void dateClickButton(View view) {
-        new DatePickerDialog(AddNote.this,d,
-                dateOfCreateNote.get(Calendar.YEAR),
-                dateOfCreateNote.get(Calendar.MONTH),
-                dateOfCreateNote.get(Calendar.DAY_OF_MONTH)).show();
-    }
-    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener(){
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth){
-            dateOfCreateNote.set(Calendar.YEAR, year);
-            dateOfCreateNote.set(Calendar.MONTH, monthOfYear);
-            dateOfCreateNote.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        }
-    };
 }

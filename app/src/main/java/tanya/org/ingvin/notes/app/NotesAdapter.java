@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,7 +23,6 @@ public class NotesAdapter extends BaseAdapter {
         notesArrayList = notes;
         lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
     @Override
     public int getCount() {
         return notesArrayList.size();
@@ -48,6 +48,7 @@ public class NotesAdapter extends BaseAdapter {
 
         ((TextView) view.findViewById(R.id.content_item_view)).setText(n.content);
         ((TextView) view.findViewById(R.id.desc_item_view)).setText(n.desc);
+        ((TextView) view.findViewById(R.id.data_view)).setText(n.createData);
 
         return view;
     }

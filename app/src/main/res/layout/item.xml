@@ -5,21 +5,23 @@
               android:layout_height="match_parent" android:weightSum="1">
 
     <TextView
-            android:layout_width="match_parent"
+            android:layout_width="341dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/content_item_view" android:layout_gravity="center_horizontal" android:layout_weight="0.51"
-            android:layout_marginTop="10dp" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
-            android:layout_marginBottom="10dp"/>
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="387dp"
-            android:id="@+id/desc_item_view" android:layout_gravity="center_horizontal" android:layout_weight="0.25"
-            android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/content_item_view" android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp" android:layout_marginRight="20dp" android:layout_marginBottom="10dp"
+            android:hint="Заголовок..."/>
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="342dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/data_view" android:layout_gravity="right"/>
+            android:text="Medium Text"
+            android:id="@+id/desc_item_view" android:layout_marginLeft="20dp" android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp" android:layout_marginBottom="10dp" android:layout_weight="0.79"
+            android:hint="Описание..."/>
+    <TextView
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/data_view" android:layout_gravity="right" android:layout_weight="0.07"/>
 </LinearLayout>
