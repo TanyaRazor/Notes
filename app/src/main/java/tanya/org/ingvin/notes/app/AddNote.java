@@ -1,6 +1,7 @@
 package tanya.org.ingvin.notes.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,12 +35,19 @@ public class AddNote extends Activity {
         String desc = ((EditText)findViewById(R.id.descNote)).getText().toString();
         String createDataView = ((TextView)findViewById(R.id.createDataView)).getText().toString();
 
-        intent.putExtra(CONTENT,content);
-        intent.putExtra(DESC, desc);
-        intent.putExtra(DATA, createDataView);
-
-        setResult(RESULT_OK, intent);
-        finish();
+        if (content.length() > 0 && desc.length() > 0 && createDataView.length() > 0){
+            intent.putExtra(CONTENT,content);
+            intent.putExtra(DESC, desc);
+            intent.putExtra(DATA, createDataView);
+            setResult(RESULT_OK, intent);
+            finish();
+        }else{
+            AlertDialog.Builder mess = new AlertDialog.Builder(AddNote.this);
+            mess.setTitle("Внимание!!!");
+            mess.setMessage("Заполните все поля.");
+            mess.setPositiveButton("Ok", null);
+            mess.show();
+        }
     }
 
     public void onClickDateButton(View view) {

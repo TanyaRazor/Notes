@@ -8,7 +8,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/contentNote" android:hint="Заголовок..." android:layout_marginLeft="20dp"
-            android:layout_marginTop="50dp" android:layout_marginRight="20dp" android:layout_marginBottom="10dp"/>
+            android:layout_marginTop="50dp" android:layout_marginRight="20dp" android:layout_marginBottom="10dp"
+            android:maxLength="120"/>
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,54 +1,35 @@
 package tanya.org.ingvin.notes.app;
 
-import android.app.Activity;
+import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.TabHost;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MainActivity extends TabActivity {
 
-public class MainActivity extends Activity {
-    static final private int ADD_NOTE = 1;
-    ListView listView;
-    NotesAdapter adapter;
-    ArrayList<Notes> notes = new ArrayList<Notes>();
+    final String TABS_TAG_1 = "Tag 1";
+    final String TABS_TAG_2 = "Tag 2";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = (ListView)findViewById(R.id.listView);
+        TabHost tabHost = getTabHost();
+
+        TabHost.TabSpec tabSpec;
+
+        tabSpec = tabHost.newTabSpec(TABS_TAG_1);
+        tabSpec.setIndicator("Заметки");
+        tabSpec.setContent(new Intent(this,AllNotes.class));
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec(TABS_TAG_2);
+        tabSpec.setContent(new Intent(this,ExecNotes.class));
+        tabSpec.setIndicator("Выполнено");
+        tabHost.addTab(tabSpec);
 
     }
-
-    public void onClick(View view){
-        Intent intent = new Intent(MainActivity.this,AddNote.class);
-        startActivityForResult(intent,ADD_NOTE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode==ADD_NOTE){
-            if (resultCode==RESULT_OK){
-                String content = data.getStringExtra(AddNote.CONTENT);
-                String desc = data.getStringExtra(AddNote.DESC);
-                String dataOfNote = data.getStringExtra(AddNote.DATA);
-
-                notes.add(new Notes(content, desc, dataOfNote));
-
-                adapter = new NotesAdapter(this, notes);
-
-                listView.setAdapter(adapter);
-            }
-        }
-    }
-
 }

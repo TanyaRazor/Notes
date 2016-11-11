@@ -19,6 +19,12 @@
         <activity android:name=".AddNote"
             android:label="@string/add_note">
         </activity>
+        <activity android:name=".AllNotes"
+                  android:label="@string/all_note">
+        </activity>
+        <activity android:name=".ExecNotes"
+                  android:label="@string/exec_note">
+        </activity>
     </application>
 
 </manifest>

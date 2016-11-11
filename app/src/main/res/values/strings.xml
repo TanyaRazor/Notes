@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">Notes</string>
+    <string name="app_name">Заметки</string>
     <string name="add_note">Добавить запись</string>
+    <string name="edit_note">Редактировать запись</string>
+    <string name="delete_note">Удалить запись</string>
+    <string name="exec_note">Исполнено</string>
+    <string name="all_note">Все записи</string>
+
 </resources>
