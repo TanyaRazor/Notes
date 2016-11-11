@@ -21,25 +21,10 @@ public class AddNote extends Activity {
 
     Calendar dateOfCreateNote = Calendar.getInstance();
 
-    public  int yy;
-    public  int mm;
-    public  int dd;
-
-    //TextView createData = ((TextView) findViewById(R.id.createDataView));
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_note);
-
-        TextView createData = ((TextView) findViewById(R.id.createDataView));
-
-        yy = dateOfCreateNote.get(Calendar.YEAR);
-        mm = dateOfCreateNote.get(Calendar.MONTH)+1;
-        dd = dateOfCreateNote.get(Calendar.DAY_OF_MONTH);
-
-        createData.setText((dd + "." + mm + "." + yy).toString());
+        setContentView(R.layout.temp_note);
     }
 
     public void saveClick(View view) {
@@ -56,4 +41,22 @@ public class AddNote extends Activity {
         setResult(RESULT_OK, intent);
         finish();
     }
+
+    public void onClickDateButton(View view) {
+        new DatePickerDialog(AddNote.this,d,
+                dateOfCreateNote.get(Calendar.YEAR),
+                dateOfCreateNote.get(Calendar.MONTH),
+                dateOfCreateNote.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener(){
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth){
+            dateOfCreateNote.set(Calendar.YEAR, year);
+            dateOfCreateNote.set(Calendar.MONTH, monthOfYear);
+            dateOfCreateNote.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+            TextView createData = ((TextView) findViewById(R.id.createDataView));
+            createData.setText((dayOfMonth + "." + (monthOfYear+1) + "." + year).toString());
+        }
+    };
 }
