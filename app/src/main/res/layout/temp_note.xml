@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <EditText
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/contentNote" android:hint="Заголовок..." android:layout_marginLeft="20dp"
-            android:layout_marginTop="50dp" android:layout_marginRight="20dp" android:layout_marginBottom="10dp"
-            android:maxLength="120"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/descNote" android:layout_gravity="center_horizontal" android:hint="Описание..."
-            android:layout_marginLeft="20dp" android:layout_marginTop="10dp" android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"/>
-    <TextView
-            android:layout_width="166dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/createDataView" android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" android:hint="Дата исполнения"
-            android:textAlignment="center" android:layout_marginTop="10dp"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Выбрать дату"
-            android:id="@+id/dateButton" android:layout_marginTop="10dp"
-            android:onClick="onClickDateButton" android:layout_marginRight="5dp" android:layout_marginLeft="20dp"/>
-    <Button
-            android:layout_width="131dp"
-            android:layout_height="wrap_content"
-            android:text="Сохранить"
-            android:id="@+id/okButton" android:layout_gravity="center_horizontal" android:layout_marginTop="50dp"
-            android:onClick="saveClick" android:layout_marginRight="5dp"/>
-</LinearLayout>
+            android:layout_height="match_parent">
+            <LinearLayout android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent">
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/contentNote" android:hint="Заголовок..." android:layout_marginLeft="20dp"
+                        android:layout_marginTop="50dp" android:layout_marginRight="20dp" android:layout_marginBottom="10dp"
+                        android:maxLength="120" android:inputType="textCapSentences"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:ems="10"
+                        android:id="@+id/descNote" android:layout_gravity="center_horizontal" android:hint="Описание..."
+                        android:layout_marginLeft="20dp" android:layout_marginTop="10dp" android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/createDataView" android:layout_marginLeft="20dp"
+                        android:hint="Дата исполнения"
+                        android:textAlignment="center" android:layout_marginTop="10dp"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Выбрать дату"
+                        android:id="@+id/dateButton" android:layout_marginTop="10dp"
+                        android:onClick="onClickDateButton" android:layout_marginLeft="20dp"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Сохранить"
+                        android:id="@+id/okButton" android:layout_gravity="center_horizontal" android:layout_marginTop="50dp"
+                        android:onClick="saveClick" android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp" android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+</ScrollView>
