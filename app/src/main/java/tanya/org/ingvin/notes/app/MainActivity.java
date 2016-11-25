@@ -3,14 +3,18 @@ package tanya.org.ingvin.notes.app;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.Toast;
+
+import java.io.*;
 
 public class MainActivity extends TabActivity {
 
     final String TABS_TAG_1 = "Tag 1";
     final String TABS_TAG_2 = "Tag 2";
-
+    AllNotes allnotes = new AllNotes();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
