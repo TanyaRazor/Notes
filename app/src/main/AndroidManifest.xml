@@ -32,6 +32,10 @@
                   android:screenOrientation="portrait"
                   android:label="@string/desc_note">
         </activity>
+        <activity android:name=".EditNote"
+                  android:screenOrientation="portrait"
+                  android:label="@string/edit_note">
+        </activity>
     </application>
 
 </manifest>
