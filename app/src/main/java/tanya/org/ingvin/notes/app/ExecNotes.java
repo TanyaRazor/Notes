@@ -20,12 +20,16 @@ public class ExecNotes extends Activity {
     final String SIZE_NOTES = "size";
     final String SAVED_CONTENT = "content";
     final String SAVED_DESC = "desc";
-    ;
     final String SAVED_DATA = "data";
 
+    final String SAVED_EXEC_CONTENT = "content";
+    final String SAVED_EXEC_DESC = "desc";
+    final String SAVED_EXEC_DATA = "data";
+
     ListView listView;
-    NotesAdapter adapter;
+    ExecNotesAdapter adapter;
     ArrayList<Notes> execNotes = new ArrayList<Notes>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +42,9 @@ public class ExecNotes extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
                 Intent intent = new Intent(ExecNotes.this, ShowNote.class);
 
-                intent.putExtra("SHOW_CONTENT", execNotes.get(i).content.toString());
-                intent.putExtra("SHOW_DESC", execNotes.get(i).desc.toString());
-                intent.putExtra("SHOW_DATA", execNotes.get(i).createData.toString());
+                intent.putExtra("SHOW_CONTENT", execNotes.get(i).content);
+                intent.putExtra("SHOW_DESC", execNotes.get(i).desc);
+                intent.putExtra("SHOW_DATA", execNotes.get(i).createData);
                 startActivity(intent);
             }
         });
@@ -50,6 +54,7 @@ public class ExecNotes extends Activity {
 
     private void loadNotes(Context ctx) {
         sPref = getPreferences(MODE_PRIVATE);
+
         int size = sPref.getInt(SIZE_NOTES, 0);
 
         for (int i = 0; i < size; i++) {
@@ -60,8 +65,25 @@ public class ExecNotes extends Activity {
             execNotes.add(new Notes(savedContent, savedDesc, savedData));
         }
 
-        adapter = new NotesAdapter(ctx, execNotes);
+        adapter = new ExecNotesAdapter(ctx, execNotes);
         listView.setAdapter(adapter);
+    }
+
+    private void loadExecNotes(Context ctx) {
+        sPref = getSharedPreferences("ClickExecNote", MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+
+        if (!(sPref.getAll().isEmpty())) {
+            String savedExecContent = sPref.getString(SAVED_EXEC_CONTENT, "");
+            String savedExecDesc = sPref.getString(SAVED_EXEC_DESC, "");
+            String savedExecData = sPref.getString(SAVED_EXEC_DATA, "");
+            execNotes.add(new Notes(savedExecContent,savedExecDesc,savedExecData));
+        }
+        adapter = new ExecNotesAdapter(ctx, execNotes);
+        listView.setAdapter(adapter);
+
+        ed.clear();
+        ed.commit();
     }
 
     protected void saveNotes() {
@@ -71,9 +93,9 @@ public class ExecNotes extends Activity {
         ed.putInt(SIZE_NOTES, execNotes.size());
 
         for (int i = 0; i < execNotes.size(); i++) {
-            ed.putString(SAVED_CONTENT + i, execNotes.get(i).content.toString());
-            ed.putString(SAVED_DESC + i, execNotes.get(i).desc.toString());
-            ed.putString(SAVED_DATA + i, execNotes.get(i).createData.toString());
+            ed.putString(SAVED_CONTENT + i, execNotes.get(i).content);
+            ed.putString(SAVED_DESC + i, execNotes.get(i).desc);
+            ed.putString(SAVED_DATA + i, execNotes.get(i).createData);
         }
 
         ed.commit();
@@ -84,6 +106,12 @@ public class ExecNotes extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         saveNotes();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadExecNotes(this);
     }
 
     public void onDeleteClick(View view) {

@@ -22,6 +22,7 @@ public class MainActivity extends TabActivity {
         tabSpec = tabHost.newTabSpec(TABS_TAG_1);
         tabSpec.setIndicator("Заметки");
         tabSpec.setContent(new Intent(this,AllNotes.class));
+
         tabHost.addTab(tabSpec);
 
         tabSpec = tabHost.newTabSpec(TABS_TAG_2);

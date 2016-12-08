@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
+import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,13 +18,16 @@ import java.util.Comparator;
 public class AllNotes extends Activity {
     static final private int ADD_NOTE = 1;
     static final private int EDIT_NOTE = 2;
-    static final private int EXEC_NOTE = 3;
+
     SharedPreferences sPref;
     final String SIZE_NOTES = "size";
     final String SAVED_CONTENT = "content";
     final String SAVED_DESC = "desc";
-    ;
     final String SAVED_DATA = "data";
+
+    final String SAVED_EXEC_CONTENT = "content";
+    final String SAVED_EXEC_DESC = "desc";
+    final String SAVED_EXEC_DATA = "data";
 
     ListView listView;
     NotesAdapter adapter;
@@ -72,6 +73,25 @@ public class AllNotes extends Activity {
         startActivityForResult(intent, EDIT_NOTE);
 
         notes.remove(pos);
+    }
+
+    public void onExecClick(View view) {
+        String posit = view.getTag().toString();
+        int pos = Integer.parseInt(posit);
+
+        sPref = getSharedPreferences("ClickExecNote", MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+
+        ed.putString(SAVED_EXEC_CONTENT, notes.get(pos).content);
+        ed.putString(SAVED_EXEC_DESC, notes.get(pos).desc);
+        ed.putString(SAVED_EXEC_DATA, notes.get(pos).createData);
+
+        ed.commit();
+
+        notes.remove(pos);
+        adapter.notifyDataSetChanged();
+        
+        Toast.makeText(this, "Выполнено!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -130,9 +150,9 @@ public class AllNotes extends Activity {
         ed.putInt(SIZE_NOTES, notes.size());
 
         for (int i = 0; i < notes.size(); i++) {
-            ed.putString(SAVED_CONTENT + i, notes.get(i).content.toString());
-            ed.putString(SAVED_DESC + i, notes.get(i).desc.toString());
-            ed.putString(SAVED_DATA + i, notes.get(i).createData.toString());
+            ed.putString(SAVED_CONTENT + i, notes.get(i).content);
+            ed.putString(SAVED_DESC + i, notes.get(i).desc);
+            ed.putString(SAVED_DATA + i, notes.get(i).createData);
         }
 
         ed.commit();
@@ -152,4 +172,5 @@ public class AllNotes extends Activity {
         notes.remove(pos);
         adapter.notifyDataSetChanged();
     }
+
 }

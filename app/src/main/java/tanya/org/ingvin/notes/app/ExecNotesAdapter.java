@@ -22,12 +22,12 @@ import java.util.Date;
 /**
  * Created by tanya on 10.11.16.
  */
-public class NotesAdapter extends BaseAdapter {
+public class ExecNotesAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
     ArrayList<Notes> notesArrayList;
 
-    NotesAdapter(Context context, ArrayList<Notes> notes){
+    ExecNotesAdapter(Context context, ArrayList<Notes> notes){
         ctx = context;
         notesArrayList = notes;
 
@@ -70,24 +70,16 @@ public class NotesAdapter extends BaseAdapter {
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         View view = convertView;
         if (view == null){
-            view = lInflater.inflate(R.layout.item, viewGroup, false);
+            view = lInflater.inflate(R.layout.exec_item, viewGroup, false);
         }
         Notes n = getNotes(i);
 
         ((TextView) view.findViewById(R.id.content_item_view)).setText(n.content);
         ((TextView) view.findViewById(R.id.data_view)).setText(n.createData);
 
-        Button editButton = (Button) view.findViewById(R.id.editButton);
         Button deleteButton = (Button)view.findViewById(R.id.deleteButton);
-        Button execButton = (Button)view.findViewById(R.id.execButton);
-
-        editButton.setTag(i);
         deleteButton.setTag(i);
-        execButton.setTag(i);
-
-        editButton.setFocusable(false);
         deleteButton.setFocusable(false);
-        execButton.setFocusable(false);
 
         return view;
     }
@@ -97,3 +89,4 @@ public class NotesAdapter extends BaseAdapter {
     }
 
 }
+

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:columnCount="2" android:rowCount="4">
+            android:layout_height="match_parent" android:columnCount="2" android:rowCount="3">
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -15,15 +15,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/data_view" android:layout_weight="0.07"
             android:layout_gravity="left" android:layout_marginLeft="20dp"
-            android:layout_row="3" android:layout_column="0"/>
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="edit"
-            android:id="@+id/editButton" android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp" android:layout_row="1" android:layout_column="1"
-            android:layout_marginTop="20dp" android:layout_gravity="right" android:onClick="onEditClick"/>
+            android:layout_row="2" android:layout_column="0"/>
     <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
@@ -32,11 +24,5 @@
             android:id="@+id/deleteButton" android:layout_marginLeft="5dp" android:layout_marginRight="10dp"
             android:layout_row="2" android:layout_column="1" android:layout_gravity="right"
             android:onClick="onDeleteClick"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="exec"
-            android:id="@+id/execButton" android:layout_marginLeft="5dp" android:layout_marginRight="10dp"
-            android:layout_row="3" android:layout_column="1" android:layout_gravity="right"
-            android:onClick="onExecClick"/>
+
 </GridLayout>
