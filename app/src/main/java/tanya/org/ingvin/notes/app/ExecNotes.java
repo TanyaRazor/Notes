@@ -1,7 +1,9 @@
 package tanya.org.ingvin.notes.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,6 +31,8 @@ public class ExecNotes extends Activity {
     ListView listView;
     ExecNotesAdapter adapter;
     ArrayList<Notes> execNotes = new ArrayList<Notes>();
+
+    AlertDialog.Builder deleteDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +120,22 @@ public class ExecNotes extends Activity {
 
     public void onDeleteClick(View view) {
         String posit = view.getTag().toString();
-        int pos = Integer.parseInt(posit);
+        final int pos = Integer.parseInt(posit);
 
-        execNotes.remove(pos);
-        adapter.notifyDataSetChanged();
+        deleteDialog = new AlertDialog.Builder(this);
+        deleteDialog.setTitle("Delete");
+        deleteDialog.setMessage("Are you sure?");
+        deleteDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                execNotes.remove(pos);
+                adapter.notifyDataSetChanged();
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).create().show();
     }
 }

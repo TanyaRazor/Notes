@@ -1,7 +1,9 @@
 package tanya.org.ingvin.notes.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,6 +34,8 @@ public class AllNotes extends Activity {
     ListView listView;
     NotesAdapter adapter;
     ArrayList<Notes> notes = new ArrayList<Notes>();
+
+    AlertDialog.Builder deleteDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +94,7 @@ public class AllNotes extends Activity {
 
         notes.remove(pos);
         adapter.notifyDataSetChanged();
-        
+
         Toast.makeText(this, "Выполнено!", Toast.LENGTH_SHORT).show();
     }
 
@@ -167,10 +171,23 @@ public class AllNotes extends Activity {
 
     public void onDeleteClick(View view) {
         String posit = view.getTag().toString();
-        int pos = Integer.parseInt(posit);
+        final int pos = Integer.parseInt(posit);
 
-        notes.remove(pos);
-        adapter.notifyDataSetChanged();
+        deleteDialog = new AlertDialog.Builder(this);
+        deleteDialog.setTitle("Delete");
+        deleteDialog.setMessage("Are you sure?");
+        deleteDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                notes.remove(pos);
+                adapter.notifyDataSetChanged();
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).create().show();
     }
 
 }
