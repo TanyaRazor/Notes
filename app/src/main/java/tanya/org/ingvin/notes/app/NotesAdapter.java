@@ -1,16 +1,10 @@
 package tanya.org.ingvin.notes.app;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +26,6 @@ public class NotesAdapter extends BaseAdapter {
         notesArrayList = notes;
 
         Collections.sort(notes, new Comparator<Notes>() {
-            @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public int compare(Notes t1, Notes t2) {
                 SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
@@ -77,9 +70,9 @@ public class NotesAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.content_item_view)).setText(n.content);
         ((TextView) view.findViewById(R.id.data_view)).setText(n.createData);
 
-        Button editButton = (Button) view.findViewById(R.id.editButton);
-        Button deleteButton = (Button)view.findViewById(R.id.deleteButton);
-        Button execButton = (Button)view.findViewById(R.id.execButton);
+        ImageButton editButton = (ImageButton) view.findViewById(R.id.editButton);
+        ImageButton deleteButton = (ImageButton)view.findViewById(R.id.deleteButton);
+        ImageButton execButton = (ImageButton)view.findViewById(R.id.execButton);
 
         editButton.setTag(i);
         deleteButton.setTag(i);

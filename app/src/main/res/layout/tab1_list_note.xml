@@ -5,14 +5,13 @@
                 android:layout_height="match_parent"
                 tools:context="${relativePackage}.${activityClass}">
 
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Новая запись"
-            android:id="@+id/addButton"
-            android:onClick="onAddClick"
-            android:layout_alignParentTop="true" android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+    <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" android:layout_marginRight="10dp" android:id="@+id/addButton"
+            android:onClick="onAddClick" android:layout_alignParentRight="true" android:background="#ffffff"
+            android:src="@drawable/add" android:scaleType="fitXY"/>
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
