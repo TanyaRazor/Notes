@@ -6,5 +6,12 @@
     <string name="exec_note">Исполнено</string>
     <string name="all_note">Все записи</string>
     <string name="desc_note">Описание</string>
-
+    <string name="delete_title">Удаление</string>
+    <string name="delete_mess">Вы уверены?</string>
+    <string name="pos_button">Да</string>
+    <string name="neg_button">Нет</string>
+    <string name="err_title">Внимание!!!</string>
+    <string name="err_mess">Заполните все поля.</string>
+    <string name="ok_button_desc">Ok</string>
+    <string name="exec">Выполнено!</string>
 </resources>

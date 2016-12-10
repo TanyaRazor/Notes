@@ -43,9 +43,9 @@ public class AddNote extends Activity {
             finish();
         }else{
             AlertDialog.Builder mess = new AlertDialog.Builder(AddNote.this);
-            mess.setTitle("Внимание!!!");
-            mess.setMessage("Заполните все поля.");
-            mess.setPositiveButton("Ok", null);
+            mess.setTitle(R.string.err_title);
+            mess.setMessage(R.string.err_mess);
+            mess.setPositiveButton(R.string.ok_button_desc, null);
             mess.show();
         }
     }

@@ -95,7 +95,7 @@ public class AllNotes extends Activity {
         notes.remove(pos);
         adapter.notifyDataSetChanged();
 
-        Toast.makeText(this, "Выполнено!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.exec, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -174,15 +174,15 @@ public class AllNotes extends Activity {
         final int pos = Integer.parseInt(posit);
 
         deleteDialog = new AlertDialog.Builder(this);
-        deleteDialog.setTitle("Delete");
-        deleteDialog.setMessage("Are you sure?");
-        deleteDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        deleteDialog.setTitle(R.string.delete_title);
+        deleteDialog.setMessage(R.string.delete_mess);
+        deleteDialog.setPositiveButton(R.string.pos_button, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 notes.remove(pos);
                 adapter.notifyDataSetChanged();
             }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(R.string.neg_button, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
