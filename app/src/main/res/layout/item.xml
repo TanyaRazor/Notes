@@ -17,21 +17,24 @@
             android:layout_gravity="left" android:layout_marginLeft="20dp"
             android:layout_row="3" android:layout_column="0"/>
     <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/editButton" android:layout_row="1" android:layout_column="1"
             android:layout_gravity="center_horizontal|right" android:layout_marginTop="10dp" android:layout_marginRight="10dp"
-            android:onClick="onEditClick" android:src="@drawable/edit" android:scaleType="fitXY"/>
+            android:onClick="onEditClick"
+            android:layout_marginBottom="10dp" android:background="@android:drawable/ic_menu_edit"/>
     <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/deleteButton" android:layout_row="2" android:layout_column="1"
             android:layout_gravity="center_horizontal|right" android:layout_marginRight="10dp"
-            android:onClick="onDeleteClick" android:src="@drawable/delete" android:scaleType="fitXY"/>
+            android:onClick="onDeleteClick" android:scaleType="centerCrop"
+            android:background="@android:drawable/ic_menu_delete" android:layout_marginBottom="10dp"/>
     <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/execButton" android:layout_row="3" android:layout_column="1"
             android:layout_gravity="center_horizontal|right" android:layout_marginRight="10dp"
-            android:onClick="onExecClick" android:src="@drawable/exec" android:scaleType="fitXY"/>
+            android:onClick="onExecClick"
+            android:background="@drawable/ic_check_mark_r"/>
 </GridLayout>
