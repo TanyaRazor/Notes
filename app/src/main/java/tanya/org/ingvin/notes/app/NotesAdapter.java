@@ -82,6 +82,8 @@ public class NotesAdapter extends BaseAdapter {
         deleteButton.setFocusable(false);
         execButton.setFocusable(false);
 
+
+
         return view;
     }
 

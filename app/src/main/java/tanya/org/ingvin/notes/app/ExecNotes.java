@@ -7,9 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,6 +31,8 @@ public class ExecNotes extends Activity {
     final String SAVED_EXEC_CONTENT = "content";
     final String SAVED_EXEC_DESC = "desc";
     final String SAVED_EXEC_DATA = "data";
+
+    final int MENU_DELETE_NOTE = 1;
 
     ListView listView;
     ExecNotesAdapter adapter;
@@ -53,7 +59,47 @@ public class ExecNotes extends Activity {
             }
         });
 
+        registerForContextMenu(listView);
+
         loadNotes(this);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+
+        menu.setHeaderTitle(execNotes.get(info.position).content);
+        menu.add(Menu.NONE, MENU_DELETE_NOTE, Menu.NONE, R.string.delete_note);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info;
+        final int pos;
+        switch (item.getItemId()) {
+            case MENU_DELETE_NOTE:
+                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                pos = info.position;
+
+                deleteDialog = new AlertDialog.Builder(this);
+                deleteDialog.setTitle(R.string.delete_title);
+                deleteDialog.setMessage(R.string.delete_mess);
+                deleteDialog.setPositiveButton(R.string.pos_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        execNotes.remove(pos);
+                        adapter.notifyDataSetChanged();
+                    }
+                }).setNegativeButton(R.string.neg_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                }).create().show();
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
     private void loadNotes(Context ctx) {

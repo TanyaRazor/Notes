@@ -7,9 +7,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Created by tanya on 11.11.16.
@@ -27,6 +32,10 @@ public class AllNotes extends Activity {
     final String SAVED_EXEC_CONTENT = "content";
     final String SAVED_EXEC_DESC = "desc";
     final String SAVED_EXEC_DATA = "data";
+
+    final int MENU_EDIT_NOTE = 1;
+    final int MENU_DELETE_NOTE = 2;
+    final int MENU_EXEC_NOTE = 3;
 
     ListView listView;
     NotesAdapter adapter;
@@ -53,6 +62,8 @@ public class AllNotes extends Activity {
                 startActivity(intent);
             }
         });
+
+        registerForContextMenu(listView);
 
         loadNotes(this);
     }
@@ -127,6 +138,75 @@ public class AllNotes extends Activity {
         }
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+
+        menu.setHeaderTitle(notes.get(info.position).content);
+        menu.add(Menu.NONE, MENU_EDIT_NOTE, Menu.NONE, R.string.edit_note);
+        menu.add(Menu.NONE, MENU_DELETE_NOTE, Menu.NONE, R.string.delete_note);
+        menu.add(Menu.NONE, MENU_EXEC_NOTE, Menu.NONE, R.string.exec_note);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info;
+        final int pos;
+        switch (item.getItemId()) {
+            case MENU_EDIT_NOTE:
+                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                pos = info.position;
+
+                Intent intent = new Intent(AllNotes.this, EditNote.class);
+                intent.putExtra("CONTENT", notes.get(pos).content.toString());
+                intent.putExtra("DESC", notes.get(pos).desc.toString());
+                intent.putExtra("CREATE_DATA", notes.get(pos).createData.toString());
+                startActivityForResult(intent, EDIT_NOTE);
+
+                notes.remove(pos);
+                break;
+            case MENU_DELETE_NOTE:
+                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                pos = info.position;
+
+                deleteDialog = new AlertDialog.Builder(this);
+                deleteDialog.setTitle(R.string.delete_title);
+                deleteDialog.setMessage(R.string.delete_mess);
+                deleteDialog.setPositiveButton(R.string.pos_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        notes.remove(pos);
+                        adapter.notifyDataSetChanged();
+                    }
+                }).setNegativeButton(R.string.neg_button, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                }).create().show();
+                break;
+            case MENU_EXEC_NOTE:
+                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                pos = info.position;
+
+                sPref = getSharedPreferences("ClickExecNote", MODE_PRIVATE);
+                SharedPreferences.Editor ed = sPref.edit();
+
+                ed.putString(SAVED_EXEC_CONTENT, notes.get(pos).content);
+                ed.putString(SAVED_EXEC_DESC, notes.get(pos).desc);
+                ed.putString(SAVED_EXEC_DATA, notes.get(pos).createData);
+
+                ed.commit();
+
+                notes.remove(pos);
+                adapter.notifyDataSetChanged();
+
+                Toast.makeText(this, R.string.exec, Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
 
     private void loadNotes(Context ctx) {
         sPref = getPreferences(MODE_PRIVATE);

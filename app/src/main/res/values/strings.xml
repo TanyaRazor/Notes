@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Заметки</string>
     <string name="add_note">Добавить запись</string>
-    <string name="edit_note">Редактировать запись</string>
-    <string name="delete_note">Удалить запись</string>
-    <string name="exec_note">Исполнено</string>
+
+    <string name="edit_note">Редактировать</string>
+    <string name="delete_note">Удалить</string>
+    <string name="exec_note">Исполнить</string>
+
     <string name="all_note">Все записи</string>
     <string name="desc_note">Описание</string>
     <string name="delete_title">Удаление</string>
