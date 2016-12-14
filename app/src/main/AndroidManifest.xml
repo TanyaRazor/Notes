@@ -20,13 +20,9 @@
                   android:screenOrientation="portrait"
                   android:label="@string/add_note">
         </activity>
-        <activity android:name=".AllNotes"
-                  android:screenOrientation="portrait"
-                  android:label="@string/all_note">
-        </activity>
         <activity android:name=".ExecNotes"
                   android:screenOrientation="portrait"
-                  android:label="@string/exec_note">
+                  android:label="@string/exec_notes">
         </activity>
         <activity android:name=".ShowNote"
                   android:screenOrientation="portrait"

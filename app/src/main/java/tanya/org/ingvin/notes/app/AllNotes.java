@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +20,7 @@ import java.util.StringTokenizer;
 /**
  * Created by tanya on 11.11.16.
  */
-public class AllNotes extends Activity {
+public class AllNotes extends AppCompatActivity {
     static final private int ADD_NOTE = 1;
     static final private int EDIT_NOTE = 2;
 
