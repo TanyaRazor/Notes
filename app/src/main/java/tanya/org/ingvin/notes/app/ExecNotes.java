@@ -1,12 +1,12 @@
 package tanya.org.ingvin.notes.app;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
  * Created by tanya on 11.11.16.
  */
 public class ExecNotes extends AppCompatActivity {
+    final static String NIGHT_THEME="night_theme";
+    SharedPreferences sp;
 
     SharedPreferences sPref;
     final String SIZE_NOTES = "size";
@@ -63,6 +66,20 @@ public class ExecNotes extends AppCompatActivity {
         registerForContextMenu(listView);
 
         loadNotes(this);
+    }
+
+    private void getPrefs(){
+        sp = getSharedPreferences("NightTheme", MODE_PRIVATE);
+
+        String check_night_theme = sp.getString(NIGHT_THEME, "");
+
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.relativeLayout);
+
+        if (check_night_theme.contentEquals("night")){
+            rl.setBackgroundColor(ContextCompat.getColor(ExecNotes.this, R.color.black));
+        }else if (check_night_theme.contentEquals("default")){
+            rl.setBackgroundColor(ContextCompat.getColor(ExecNotes.this, R.color.white));
+        }
     }
 
     @Override
@@ -163,6 +180,8 @@ public class ExecNotes extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadExecNotes(this);
+        getPrefs();
+        adapter.notifyDataSetChanged();
     }
 
     public void onDeleteClick(View view) {

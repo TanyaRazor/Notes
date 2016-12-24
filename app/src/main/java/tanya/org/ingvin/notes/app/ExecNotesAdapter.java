@@ -1,6 +1,10 @@
 package tanya.org.ingvin.notes.app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +17,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
+import static android.R.drawable.alert_dark_frame;
+import static android.R.drawable.alert_light_frame;
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by tanya on 10.11.16.
  */
 public class ExecNotesAdapter extends BaseAdapter {
+    final static String NIGHT_THEME="night_theme";
+    SharedPreferences sp;
+
     Context ctx;
     LayoutInflater lInflater;
     ArrayList<Notes> notesArrayList;
@@ -59,20 +70,37 @@ public class ExecNotesAdapter extends BaseAdapter {
         return i;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
+        sp = ctx.getSharedPreferences("NightTheme", MODE_PRIVATE);
+        String check_night_theme = sp.getString(NIGHT_THEME, "");
+
         View view = convertView;
         if (view == null){
             view = lInflater.inflate(R.layout.exec_item, viewGroup, false);
         }
         Notes n = getNotes(i);
 
-        ((TextView) view.findViewById(R.id.content_item_view)).setText(n.content);
-        ((TextView) view.findViewById(R.id.data_view)).setText(n.createData);
+        TextView content_view = (TextView) view.findViewById(R.id.content_item_view);
+        TextView data_view = (TextView) view.findViewById(R.id.data_view);
+        content_view.setText(n.content);
+        data_view.setText(n.createData);
+        GridLayout gl = (GridLayout) view.findViewById(R.id.gl);
 
         ImageButton deleteButton = (ImageButton)view.findViewById(R.id.deleteButton);
         deleteButton.setTag(i);
         deleteButton.setFocusable(false);
+
+        if (check_night_theme.contentEquals("night")){
+            content_view.setTextColor(ContextCompat.getColor(ctx, R.color.white));
+            data_view.setTextColor(ContextCompat.getColor(ctx, R.color.white));
+            gl.setBackground(ContextCompat.getDrawable(ctx, alert_dark_frame));
+        }else if (check_night_theme.contentEquals("default")){
+            content_view.setTextColor(ContextCompat.getColor(ctx, R.color.black));
+            data_view.setTextColor(ContextCompat.getColor(ctx, R.color.black));
+            gl.setBackground(ContextCompat.getDrawable(ctx, alert_light_frame));
+        }
 
         return view;
     }

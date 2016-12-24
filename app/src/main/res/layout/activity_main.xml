@@ -3,18 +3,20 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="${relativePackage}.${activityClass}">
+                tools:context="${relativePackage}.${activityClass}"
+                android:id="@+id/relativeLayout">
 
     <ImageButton
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp" android:layout_marginRight="10dp" android:id="@+id/addButton"
-            android:onClick="onAddClick" android:layout_alignParentRight="true" android:background="@android:drawable/ic_input_add"
-            tools:ignore="ContentDescription,RtlHardcoded"/>
+            android:onClick="onAddClick" android:layout_alignParentRight="true"
+            android:background="@android:drawable/ic_input_add"/>
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/listView" android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true" android:layout_below="@+id/addButton" android:clickable="true"/>
+            android:layout_alignParentBottom="true" android:layout_below="@+id/addButton"
+            android:clickable="true" android:dividerHeight="0dp" android:divider="@android:color/transparent"/>
 </RelativeLayout>
